@@ -7,6 +7,7 @@ TagManager:
   - PickUp
   - PickDown
   - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX

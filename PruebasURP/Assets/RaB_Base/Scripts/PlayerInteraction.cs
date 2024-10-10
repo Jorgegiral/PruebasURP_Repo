@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; //Librería para poder referenciar elementos de User Interface.
+using TMPro; //Librería para poder referenciar elementos de Text Mes Pro
 
 public class PlayerInteraction : MonoBehaviour
 {
+
+    [Header("UI References")]
+    public TMP_Text pointsText; //Ref al texto de Ui que quiero que cambie dinámicamente según los puntos del player
+
     [Header("Point System Parameters")]
     // Variables para definir los puntos del jugador
     public int currentPoints;
@@ -17,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentPoints < 0) { currentPoints = 0; }
         if (transform.position.y <= respawnFallLimit) { Respawn(); }
+        UIUpdate();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -42,4 +49,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         transform.position = respawnPoint.position;
     }
+
+    void UIUpdate()
+    {
+        pointsText.text = "Points: " + currentPoints.ToString() + "/" + winPoints.ToString();
+
+    }    
 }

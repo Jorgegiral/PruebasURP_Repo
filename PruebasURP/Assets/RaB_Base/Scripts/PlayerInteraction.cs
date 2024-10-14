@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     // Variables para definir los puntos del jugador
     public int currentPoints;
     public int winPoints;
+    public GameObject winGoal;
 
     [Header("Respawn Parameters")]
     public Transform respawnPoint;
@@ -23,6 +24,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentPoints < 0) { currentPoints = 0; }
         if (transform.position.y <= respawnFallLimit) { Respawn(); }
+        if (currentPoints >= winPoints) { winGoal.SetActive(true); }
         UIUpdate();
     }
     private void OnTriggerEnter(Collider other)
@@ -38,6 +40,11 @@ public class PlayerInteraction : MonoBehaviour
             currentPoints -= 1;
             other.gameObject.SetActive(false);
             // Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            WinCall();
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -55,4 +62,10 @@ public class PlayerInteraction : MonoBehaviour
         pointsText.text = "Points: " + currentPoints.ToString() + "/" + winPoints.ToString();
 
     }    
+
+    void WinCall()
+    {
+        //Acciòn del cambio de escena
+        Debug.Log("He ganado!");
+    }
 }

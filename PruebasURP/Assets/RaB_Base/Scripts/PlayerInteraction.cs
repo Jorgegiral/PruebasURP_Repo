@@ -10,6 +10,10 @@ public class PlayerInteraction : MonoBehaviour
     [Header("UI References")]
     public TMP_Text pointsText; //Ref al texto de Ui que quiero que cambie dinámicamente según los puntos del player
 
+    [Header("Scene Management")]
+    public SceneChanger sceneManagerScript;
+    public int sceneToLoad;
+
     [Header("Point System Parameters")]
     // Variables para definir los puntos del jugador
     public int currentPoints;
@@ -66,6 +70,7 @@ public class PlayerInteraction : MonoBehaviour
     void WinCall()
     {
         //Acciòn del cambio de escena
-        Debug.Log("He ganado!");
+        sceneManagerScript.SceneLoader(sceneToLoad);
+
     }
 }
